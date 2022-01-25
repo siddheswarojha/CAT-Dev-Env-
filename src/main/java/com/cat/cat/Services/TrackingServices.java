@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -34,5 +35,15 @@ public class TrackingServices {
             responses.add(parcelResponse);
         }
         return responses;
+    }
+
+    public Optional<ParcelData> getParticularTrackingDetail(Long orderId) {
+        boolean checkDataWithOrderId = parcelRepository.existsById(orderId);
+        if(!checkDataWithOrderId)
+        {
+            throw new IllegalStateException("No Such Order Id Found");
+        }
+        return parcelRepository.findById(orderId);
+
     }
 }
