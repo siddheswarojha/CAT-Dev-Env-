@@ -5,6 +5,7 @@ package com.cat.cat.Services;
 import com.cat.cat.Model.ParcelData;
 import com.cat.cat.Repository.ParcelRepository;
 import com.cat.cat.View.ParcelDataView;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -38,12 +39,35 @@ public class TrackingServices {
     }
 
     public Optional<ParcelData> getParticularTrackingDetail(Long orderId) {
-        boolean checkDataWithOrderId = parcelRepository.existsById(orderId);
-        if(!checkDataWithOrderId)
-        {
-            throw new IllegalStateException("No Such Order Id Found");
-        }
-        return parcelRepository.findById(orderId);
+//        boolean checkDataWithOrderId = parcelRepository.existsById(orderId);
+//        if(!checkDataWithOrderId)
+//        {
+//            throw new IllegalStateException("No Such Order Id Found");
+//        }
+//        return parcelRepository.findById(orderId);
 
+        Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(orderId);
+
+        if(!parcelOptional.isPresent())
+        {
+            throw new IllegalStateException("Parcel Not Found");
+
+        }
+        return parcelRepository.findParcelDataByOrderId(orderId);
+
+    }
+
+    public void setTrackingDetail(ParcelData parcelData) {
+        Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(parcelData.getOrderId());
+
+        if(parcelOptional.isPresent())
+        {
+            throw new IllegalStateException("OrderId should be Unique");
+
+        }
+
+
+
+        parcelRepository.save(parcelData);
     }
 }

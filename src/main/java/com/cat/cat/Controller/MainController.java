@@ -4,6 +4,7 @@ package com.cat.cat.Controller;
 import com.cat.cat.Model.ParcelData;
 import com.cat.cat.Services.TrackingServices;
 import com.cat.cat.View.ParcelDataView;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,13 @@ public class MainController {
     public Optional<ParcelData> getParticularTrackingDetail(@PathVariable("orderId") Long orderId)
     {
        return trackingServices.getParticularTrackingDetail(orderId);
+    }
+
+
+    @PostMapping("/saveTrackingDetail")
+    public void setTrackingDetail(@RequestBody  ParcelData parcelData)
+    {
+        trackingServices.setTrackingDetail(parcelData);
     }
 
 

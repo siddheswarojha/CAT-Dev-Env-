@@ -1,10 +1,10 @@
 package com.cat.cat.Model;
 
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 
 
@@ -15,21 +15,29 @@ import java.time.LocalDate;
 public class ParcelData {
 
     @Id
-    private Long _id;
+    private ObjectId _id;
+    private Long orderId;
     private String name;
     private String itemType;
     private String startLocation;
     private String currentLocation;
     private LocalDate expectedDeliveryDate;
     private String status;
-    private String deliveryLocation;
 
-    public Long getOrderId() {
+    public ObjectId get_id() {
         return _id;
     }
 
-    public void setOrderId(Long _id) {
+    public void set_id(ObjectId _id) {
         this._id = _id;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public String getName() {
@@ -90,8 +98,28 @@ public class ParcelData {
 
 
 
+    public ParcelData(Long orderId,
+                      String name,
+                      String itemType,
+                      String startLocation,
+                      String currentLocation,
+                      LocalDate expectedDeliveryDate,
+                      String status,
+                      String deliveryLocation) {
+        this.orderId = orderId;
+        this.name = name;
+        this.itemType = itemType;
+        this.startLocation = startLocation;
+        this.currentLocation = currentLocation;
+        this.expectedDeliveryDate = expectedDeliveryDate;
+        this.status = status;
+        this.deliveryLocation = deliveryLocation;
+    }
 
-    public ParcelData(Long _id,
+    private String deliveryLocation;
+
+    public ParcelData(ObjectId _id,
+                      Long orderId,
                       String name,
                       String itemType,
                       String startLocation,
@@ -100,6 +128,7 @@ public class ParcelData {
                       String status,
                       String deliveryLocation) {
         this._id = _id;
+        this.orderId = orderId;
         this.name = name;
         this.itemType = itemType;
         this.startLocation = startLocation;
@@ -109,25 +138,10 @@ public class ParcelData {
         this.deliveryLocation = deliveryLocation;
     }
 
-    private ParcelData()
-    {}
+    public ParcelData(){}
 
-    public ParcelData(
-                      String name,
-                      String itemType,
-                      String startLocation,
-                      String currentLocation,
-                      LocalDate expectedDeliveryDate,
-                      String status,
-                      String deliveryLocation) {
-        this.name = name;
-        this.itemType = itemType;
-        this.startLocation = startLocation;
-        this.currentLocation = currentLocation;
-        this.expectedDeliveryDate = expectedDeliveryDate;
-        this.status = status;
-        this.deliveryLocation = deliveryLocation;
-    }
+
+
 
 
 }

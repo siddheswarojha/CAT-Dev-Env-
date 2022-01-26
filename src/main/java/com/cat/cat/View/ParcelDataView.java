@@ -1,20 +1,44 @@
 package com.cat.cat.View;
 
 import com.cat.cat.Model.ParcelData;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
 
 public class ParcelDataView {
 
 
-    private Long _id;
 
-    public Long getOrderId() {
-        return _id;
+    private Long orderId;
+    private String name;
+    private String itemType;
+    private String startLocation;
+    private String currentLocation;
+    private LocalDate expectedDeliveryDate;
+    private String status;
+    private String deliveryLocation;
+
+    public ParcelDataView(ParcelData pd)
+    {
+
+        this.orderId=pd.getOrderId();
+        this.name =pd.getName();
+        this.itemType=pd.getItemType();
+        this.startLocation=pd.getStartLocation();
+        this.currentLocation=pd.getCurrentLocation();
+        this.expectedDeliveryDate=pd.getExpectedDeliveryDate();
+        this.status=pd.getStatus();
+        this.deliveryLocation= pd.getDeliveryLocation();
     }
 
-    public void setOrderId(Long _id) {
-        this._id = _id;
+
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public String getName() {
@@ -73,24 +97,4 @@ public class ParcelDataView {
         this.deliveryLocation = deliveryLocation;
     }
 
-    private String name;
-    private String itemType;
-    private String startLocation;
-    private String currentLocation;
-    private LocalDate expectedDeliveryDate;
-    private String status;
-    private String deliveryLocation;
-
-
-    public ParcelDataView(ParcelData data)
-    {
-        this._id = data.getOrderId();
-        this.name =data.getName();
-        this.itemType= data.getItemType();
-        this.startLocation = data.getStartLocation();
-        this.currentLocation= data.getCurrentLocation();
-        this.expectedDeliveryDate=data.getExpectedDeliveryDate();
-        this.status=data.getStatus();
-        this.deliveryLocation= data.getDeliveryLocation();
-    }
 }
