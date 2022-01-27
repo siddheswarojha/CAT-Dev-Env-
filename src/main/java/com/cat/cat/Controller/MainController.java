@@ -4,7 +4,6 @@ package com.cat.cat.Controller;
 import com.cat.cat.Model.ParcelData;
 import com.cat.cat.Services.TrackingServices;
 import com.cat.cat.View.ParcelDataView;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +39,22 @@ public class MainController {
     {
         trackingServices.setTrackingDetail(parcelData);
     }
+
+
+    @DeleteMapping("/cancelDelivery/{orderId}")
+
+    public void cancelDelivery(@PathVariable("orderId") Long orderId)
+    {
+        trackingServices.cancelDelivery(orderId);
+    }
+
+
+//    @DeleteMapping("/deliveryCompleted/{orderId}")
+//
+//    public void completedDelivery(@PathVariable("orderId") Long orderId)
+//    {
+//        trackingServices.completedDelivery(orderId);
+//    }
 
 
 

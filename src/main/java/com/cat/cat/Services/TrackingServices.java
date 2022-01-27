@@ -70,4 +70,30 @@ public class TrackingServices {
 
         parcelRepository.save(parcelData);
     }
+
+    public void cancelDelivery(Long orderId) {
+
+        Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(orderId);
+
+        if(!parcelOptional.isPresent())
+        {
+            throw new IllegalStateException("OrderId not found!!");
+
+        }
+
+        parcelRepository.deleteParcelDataByOrderId(orderId);
+    }
+
+//    public void completedDelivery(Long orderId) {
+//
+//        Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(orderId);
+//
+//        if(!parcelOptional.isPresent())
+//        {
+//            throw new IllegalStateException("OrderId not found!!");
+//
+//        }
+//
+//        parcelRepository.deleteParcelDataByOrderId(orderId);
+//    }
 }
