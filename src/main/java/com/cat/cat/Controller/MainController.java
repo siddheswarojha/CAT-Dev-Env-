@@ -57,6 +57,15 @@ public class MainController {
 //    }
 
 
+    @PutMapping("/deliveryCompleted/{orderId}")
+    public void deliveryCompleted(@PathVariable("orderId") Long orderId,
+                                  @RequestParam(required = false) String status)
+    {
+        trackingServices.deliveryCompleted(orderId,status);
+
+    }
+
+
 
 
 
