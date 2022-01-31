@@ -8,8 +8,11 @@ import com.cat.cat.View.ParcelDataView;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -84,6 +87,23 @@ public class TrackingServices {
         parcelRepository.deleteParcelDataByOrderId(orderId);
     }
 
+    @Transactional
+    public void deliveryCompleted(Long orderId, String status) {
+        ParcelData parcelData= parcelRepository.findParcelDataByOrderId(orderId)
+                .orElseThrow(()->new IllegalStateException("Parcel Not Found"));
+
+        if(!Objects.equals(parcelData.getStatus(),status))
+        {
+
+            System.out.println("STATUS UPDATED");
+            parcelData.setStatus(status);
+            parcelRepository.save(parcelData);
+            System.out.println(status);
+        }
+
+
+    }
+
 //    public void completedDelivery(Long orderId) {
 //
 //        Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(orderId);
@@ -97,3 +117,4 @@ public class TrackingServices {
 //        parcelRepository.deleteParcelDataByOrderId(orderId);
 //    }
 }
+
