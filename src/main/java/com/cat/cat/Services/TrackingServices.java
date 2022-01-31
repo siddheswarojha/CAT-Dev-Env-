@@ -2,10 +2,11 @@ package com.cat.cat.Services;
 
 
 
+import com.cat.cat.Model.BillData;
 import com.cat.cat.Model.ParcelData;
+import com.cat.cat.Repository.BillRepository;
 import com.cat.cat.Repository.ParcelRepository;
 import com.cat.cat.View.ParcelDataView;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,9 @@ public class TrackingServices {
 
     @Autowired
     private ParcelRepository parcelRepository;
+
+    @Autowired
+    private BillRepository billRepository;
 
 
     @Autowired
@@ -100,6 +104,67 @@ public class TrackingServices {
             parcelRepository.save(parcelData);
             System.out.println(status);
         }
+
+
+    }
+
+    @Transactional
+    public void setBilling(Long orderId) {
+
+        System.out.println(orderId);
+
+        ParcelData parcelData = parcelRepository.findParcelDataByOrderId(orderId)
+                .orElseThrow(()->new IllegalStateException("Order Id Not Found!"));
+
+
+        BillData billData=new BillData();
+
+        billData.setItemType(parcelData.getItemType());
+        billData.setOrderId(orderId);
+     if(billData.getItemType().equals("fragile"))
+     {
+         double price = 500.00;
+         billData.setDiscount("20%");
+         double discount = price*0.2;
+         double tax = price*0.18;
+         double amount = price+tax-discount;
+         System.out.println(amount);
+         billData.setPrice(String.valueOf(price));
+         billData.setTaxation(String.valueOf(tax));
+         billData.setFinalAmount(String.valueOf(amount));
+
+         billRepository.save(billData);
+     }
+     else if(billData.getItemType().equals("electronics"))
+        {
+            double price = 300.00;
+            billData.setDiscount("10%");
+            double discount = price*0.1;
+            double tax = price*0.18;
+            double amount = price+tax-discount;
+            System.out.println(amount);
+            billData.setPrice(String.valueOf(price));
+            billData.setTaxation(String.valueOf(tax));
+            billData.setFinalAmount(String.valueOf(amount));
+
+            billRepository.save(billData);
+        }
+     else if(billData.getItemType().equals("Normal"))
+     {
+         double price = 100.00;
+         billData.setDiscount("15%");
+         double discount = price*0.15;
+         double tax = price*0.18;
+         double amount = price+tax-discount;
+         System.out.println(amount);
+         billData.setPrice(String.valueOf(price));
+         billData.setTaxation(String.valueOf(tax));
+         billData.setFinalAmount(String.valueOf(amount));
+
+         billRepository.save(billData);
+     }
+
+
 
 
     }

@@ -1,6 +1,7 @@
 package com.cat.cat.Controller;
 
 
+import com.cat.cat.Model.BillData;
 import com.cat.cat.Model.ParcelData;
 import com.cat.cat.Services.TrackingServices;
 import com.cat.cat.View.ParcelDataView;
@@ -66,6 +67,13 @@ public class MainController {
     }
 
 
+
+
+    @PostMapping("/generateBill/{orderId}")
+    public void setBilling(@PathVariable Long orderId)
+    {
+        trackingServices.setBilling(orderId);
+    }
 
 
 
