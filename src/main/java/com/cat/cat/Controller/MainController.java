@@ -3,6 +3,7 @@ package com.cat.cat.Controller;
 
 import com.cat.cat.Model.BillData;
 import com.cat.cat.Model.ParcelData;
+import com.cat.cat.Services.BillingServices;
 import com.cat.cat.Services.TrackingServices;
 import com.cat.cat.View.ParcelDataView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class MainController {
 
     @Autowired
     private TrackingServices trackingServices;
+
+    @Autowired
+    private BillingServices billingServices;
+
 
     @GetMapping("/getTrackingDetails")
     public List<ParcelDataView> getAllTrackingDetail()
@@ -72,7 +77,7 @@ public class MainController {
     @PostMapping("/generateBill/{orderId}")
     public void setBilling(@PathVariable Long orderId)
     {
-        trackingServices.setBilling(orderId);
+        billingServices.setBilling(orderId);
     }
 
 
