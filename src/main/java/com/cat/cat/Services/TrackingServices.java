@@ -97,6 +97,7 @@ public class TrackingServices {
 
             System.out.println("STATUS UPDATED");
             parcelData.setStatus(status);
+            parcelRepository.save(parcelData);
             System.out.println(status);
         }
 
