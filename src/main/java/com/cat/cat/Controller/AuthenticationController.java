@@ -3,6 +3,7 @@ package com.cat.cat.Controller;
 
 import com.cat.cat.Model.User;
 import com.cat.cat.Services.AuthenticationServices;
+import com.cat.cat.View.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,14 @@ public class AuthenticationController {
     {
 
         return authServices.register(user);
+
+    }
+
+    @PostMapping("/login")
+    public String login( @RequestBody Login login)
+    {
+
+        return authServices.login(login);
 
     }
 }

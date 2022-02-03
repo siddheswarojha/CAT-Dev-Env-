@@ -1,8 +1,10 @@
 package com.cat.cat.Services;
 
 
+import com.cat.cat.Model.ParcelData;
 import com.cat.cat.Model.User;
 import com.cat.cat.Repository.UserRepository;
+import com.cat.cat.View.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +47,16 @@ public class AuthenticationServices {
             return "Registered";
         }
 
+    }
+
+    public String login(Login login) {
+
+        User user = userRepository.findUserByEmailAddress(login.getEmailAddress())
+                .orElseThrow(() -> new IllegalStateException("User Not Found!"));
+
+
+        if (login.getPassword().equals(user.getPassword()))
+            return user.getApiKey();
+        return "error";
     }
 }
