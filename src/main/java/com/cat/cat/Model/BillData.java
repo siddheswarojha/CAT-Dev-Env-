@@ -1,11 +1,14 @@
 package com.cat.cat.Model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-
+@Getter
+@Setter
 @Document(collection = "billData")
 @Component
 public class BillData {
@@ -19,61 +22,8 @@ public class BillData {
     private String discount;
     private String finalAmount;
 
-    public ObjectId get_id() {
-        return _id;
-    }
 
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-    }
 
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
-
-    public String getTaxation() {
-        return taxation;
-    }
-
-    public void setTaxation(String taxation) {
-        this.taxation = taxation;
-    }
-
-    public String getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(String discount) {
-        this.discount = discount;
-    }
-
-    public String getFinalAmount() {
-        return finalAmount;
-    }
-
-    public void setFinalAmount(String finalAmount) {
-        this.finalAmount = finalAmount;
-    }
 
 
 

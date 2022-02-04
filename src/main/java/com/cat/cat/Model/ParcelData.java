@@ -1,6 +1,8 @@
 package com.cat.cat.Model;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,6 +14,8 @@ import java.time.LocalDate;
 
 @Document(collection = "cat")
 @Component
+@Getter
+@Setter
 public class ParcelData {
 
     @Id
@@ -23,78 +27,6 @@ public class ParcelData {
     private String currentLocation;
     private LocalDate expectedDeliveryDate;
     private String status;
-
-    public ObjectId get_id() {
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
-
-    public String getStartLocation() {
-        return startLocation;
-    }
-
-    public void setStartLocation(String startLocation) {
-        this.startLocation = startLocation;
-    }
-
-    public String getCurrentLocation() {
-        return currentLocation;
-    }
-
-    public void setCurrentLocation(String currentLocation) {
-        this.currentLocation = currentLocation;
-    }
-
-    public LocalDate getExpectedDeliveryDate() {
-        return expectedDeliveryDate;
-    }
-
-    public void setExpectedDeliveryDate(LocalDate expectedDeliveryDate) {
-        this.expectedDeliveryDate = expectedDeliveryDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeliveryLocation() {
-        return deliveryLocation;
-    }
-
-    public void setDeliveryLocation(String deliveryLocation) {
-        this.deliveryLocation = deliveryLocation;
-    }
 
 
 
