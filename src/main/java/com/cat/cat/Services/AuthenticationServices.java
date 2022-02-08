@@ -1,13 +1,13 @@
 package com.cat.cat.Services;
 
 
-import com.cat.cat.Model.ParcelData;
 import com.cat.cat.Model.User;
 import com.cat.cat.Repository.UserRepository;
 import com.cat.cat.View.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,8 +18,8 @@ public class AuthenticationServices {
     @Autowired
     private UserRepository userRepository;
 
-    public String register(User user) {
-        Optional<User> userOptional = userRepository.findUserByEmailAddress(user.getEmailAddress());
+    public String register(Map<String, String> user) {
+        Optional<User> userOptional = userRepository.findUserByEmailAddress(user.get("emailAddress"));
 
         if(userOptional.isPresent())
         {
@@ -27,7 +27,7 @@ public class AuthenticationServices {
 
         }
 
-        else if(user.getEmailAddress()==null || user.getName()==null|| user.getPassword()==null)
+        else if(user.get("emailAddress")==null || user.get("name")==null|| user.get("password")==null)
         {
             return "Bad Body Found";
         }
@@ -42,8 +42,13 @@ public class AuthenticationServices {
 //
 //            }
 
-            user.setApiKey(key);
-            userRepository.save(user);
+            User userObj = new User();
+
+            userObj.setApiKey(key);
+            userObj.setEmailAddress(user.get("emailAddress"));
+            userObj.setName(user.get("name"));
+            userObj.setPassword(user.get("password"));
+            userRepository.save(userObj);
             return "Registered";
         }
 

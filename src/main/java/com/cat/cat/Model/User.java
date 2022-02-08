@@ -22,9 +22,6 @@ public class User {
     String password;
     String emailAddress;
 
-
-
-
     public User(){}
 
     public User(String apiKey, String name, String password, String emailAddress) {
