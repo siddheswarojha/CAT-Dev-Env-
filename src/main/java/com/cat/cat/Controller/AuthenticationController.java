@@ -29,7 +29,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public String login( @RequestBody Login login)
+    public String login( @RequestParam Map<String,String> login)
     {
 
         return authServices.login(login);

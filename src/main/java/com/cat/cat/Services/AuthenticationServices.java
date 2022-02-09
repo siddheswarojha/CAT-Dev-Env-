@@ -3,7 +3,6 @@ package com.cat.cat.Services;
 
 import com.cat.cat.Model.User;
 import com.cat.cat.Repository.UserRepository;
-import com.cat.cat.View.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,14 +53,20 @@ public class AuthenticationServices {
 
     }
 
-    public String login(Login login) {
+    public String login(Map<String, String> login) {
 
-        User user = userRepository.findUserByEmailAddress(login.getEmailAddress())
+        User user = userRepository.findUserByEmailAddress(login.get("emailAddress"))
                 .orElseThrow(() -> new IllegalStateException("User Not Found!"));
 
 
-        if (login.getPassword().equals(user.getPassword()))
+        if (login.get("password").equals(user.getPassword()))
+        {
             return user.getApiKey();
-        return "error";
+        }
+        else
+        {
+            return "Wrong Password";
+        }
+
     }
 }
