@@ -4,16 +4,14 @@
     CAT is one of the most adavnced courier tracking system. The application provides 
     users the power to track their courier and parcel in realtime using the android application.
 
-    This application is supported by SpringBoot for the backend. The 
+    This application is supported by SpringBoot for the backend.
 
     The feature provided in the first release are:
-
 
     1. User Authentication
     2. Tracking packages
     3. Ordering Parcels
-    4. Real time chat with admins 
-    5. Complaint and other issues
+    4. Complaint and other issues
 
 
 
