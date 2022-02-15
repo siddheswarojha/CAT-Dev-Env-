@@ -49,9 +49,9 @@ public class MainController {
 
     @DeleteMapping("/cancelDelivery/{orderId}")
 
-    public void cancelDelivery(@PathVariable("orderId") Long orderId)
+    public String  cancelDelivery(@PathVariable("orderId") Long orderId)
     {
-        trackingServices.cancelDelivery(orderId);
+        return trackingServices.cancelDelivery(orderId);
     }
 
 

@@ -77,7 +77,7 @@ public class TrackingServices {
         parcelRepository.save(parcelData);
     }
 
-    public void cancelDelivery(Long orderId) {
+    public String cancelDelivery(Long orderId) {
 
         Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(orderId);
 
@@ -88,6 +88,7 @@ public class TrackingServices {
         }
 
         parcelRepository.deleteParcelDataByOrderId(orderId);
+        return "Order Canceled";
     }
 
     @Transactional
