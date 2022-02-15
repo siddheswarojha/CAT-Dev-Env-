@@ -20,9 +20,6 @@ public class MainController {
     @Autowired
     private TrackingServices trackingServices;
 
-    @Autowired
-    private BillingServices billingServices;
-
 
     @GetMapping("/getTrackingDetails")
     public List<ParcelDataView> getAllTrackingDetail()
@@ -74,11 +71,7 @@ public class MainController {
 
 
 
-    @PostMapping("/generateBill/{orderId}")
-    public void setBilling(@PathVariable Long orderId)
-    {
-        billingServices.setBilling(orderId);
-    }
+
 
 
 

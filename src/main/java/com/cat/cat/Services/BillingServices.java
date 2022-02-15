@@ -21,7 +21,7 @@ public class BillingServices {
 
 
     @Transactional
-    public void setBilling(Long orderId) {
+    public String setBilling(Long orderId) {
 
         System.out.println(orderId);
 
@@ -44,9 +44,9 @@ public class BillingServices {
                 billData.setPrice(String.valueOf(price));
                 billData.setTaxation(String.valueOf(tax));
                 billData.setFinalAmount(String.valueOf(amount));
-
                 billRepository.save(billData);
-                break;
+                return "Success";
+
             }
             case "electronics": {
                 double price = 300.00;
@@ -58,9 +58,9 @@ public class BillingServices {
                 billData.setPrice(String.valueOf(price));
                 billData.setTaxation(String.valueOf(tax));
                 billData.setFinalAmount(String.valueOf(amount));
-
                 billRepository.save(billData);
-                break;
+                return "Success";
+
             }
             case "Normal": {
                 double price = 100.00;
@@ -72,13 +72,13 @@ public class BillingServices {
                 billData.setPrice(String.valueOf(price));
                 billData.setTaxation(String.valueOf(tax));
                 billData.setFinalAmount(String.valueOf(amount));
-
                 billRepository.save(billData);
-                break;
+                return "Success";
+
             }
         }
 
-
+            return "something went wrong";
 
 
     }
