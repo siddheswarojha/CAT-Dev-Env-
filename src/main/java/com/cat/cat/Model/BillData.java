@@ -15,7 +15,7 @@ public class BillData {
 
     @Id
     private ObjectId _id;
-    private Long orderId;
+    private String orderId;
     private String price;
     private String itemType;
     private String taxation;
@@ -27,7 +27,7 @@ public class BillData {
 
 
 
-    public BillData(Long orderId,
+    public BillData(String orderId,
                     String price,
                     String itemType,
                     String taxation,
@@ -44,7 +44,7 @@ public class BillData {
 
 
     public BillData(ObjectId _id,
-                    Long orderId,
+                    String orderId,
                     String price,
                     String itemType,
                     String taxation,
@@ -64,5 +64,13 @@ public class BillData {
     }
 
 
-
+//    @Override
+//    public String toString() {
+//        return "orderId=" + orderId +
+//                " price=" + price  +
+//                " itemType=" + itemType +
+//                " taxation=" + taxation +
+//                " discount=" + discount +
+//                " finalAmount=" + finalAmount;
+//    }
 }

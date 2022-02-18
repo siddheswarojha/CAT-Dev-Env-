@@ -1,6 +1,7 @@
 package com.cat.cat.Services;
 
 
+import com.aspose.cells.*;
 import com.cat.cat.Model.BillData;
 import com.cat.cat.Model.ParcelData;
 import com.cat.cat.Repository.BillRepository;
@@ -8,6 +9,10 @@ import com.cat.cat.Repository.ParcelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Service
 public class BillingServices {
@@ -21,7 +26,7 @@ public class BillingServices {
 
 
     @Transactional
-    public String setBilling(Long orderId) {
+    public String setBilling(String orderId) throws Exception {
 
         System.out.println(orderId);
 
@@ -45,6 +50,29 @@ public class BillingServices {
                 billData.setTaxation(String.valueOf(tax));
                 billData.setFinalAmount(String.valueOf(amount));
                 billRepository.save(billData);
+
+/*
+
+start
+ */
+
+                System.out.println("starting pdf creation successfully");
+
+//                Workbook workbook = new Workbook();
+//                Worksheet worksheet = workbook.getWorksheets().get(0);
+////                String fileName = billData.toString();
+////                String content = new String(Files.readAllBytes(Paths.get(fileName)));
+//
+//                String content = new String(billData.toString());
+//                System.out.println(billData);
+//
+//                JsonLayoutOptions layoutOptions = new JsonLayoutOptions();
+//                layoutOptions.setArrayAsTable(true);
+//                JsonUtility.importData(content, worksheet.getCells(), 0, 0, layoutOptions);
+//                workbook.save("output.pdf", SaveFormat.AUTO);
+
+                System.out.println("reached pdf creation successfully");
+
                 return "Success";
 
             }
@@ -62,6 +90,7 @@ public class BillingServices {
                 return "Success";
 
             }
+
             case "Normal": {
                 double price = 100.00;
                 billData.setDiscount("15%");

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -31,22 +32,22 @@ public class MainController {
 
     @GetMapping("/getTrackingDetail/{orderId}")
 
-    public Optional<ParcelData> getParticularTrackingDetail(@PathVariable("orderId") Long orderId)
+    public Optional<ParcelData> getParticularTrackingDetail(@PathVariable("orderId") String orderId)
     {
        return trackingServices.getParticularTrackingDetail(orderId);
     }
 
 
     @PostMapping("/saveTrackingDetail")
-    public void setTrackingDetail(@RequestBody  ParcelData parcelData)
+    public String setTrackingDetail(@RequestParam Map<String,String> parcelData)
     {
-        trackingServices.setTrackingDetail(parcelData);
+        return trackingServices.setTrackingDetail(parcelData);
     }
 
 
     @DeleteMapping("/cancelDelivery/{orderId}")
 
-    public String  cancelDelivery(@PathVariable("orderId") Long orderId)
+    public String  cancelDelivery(@PathVariable("orderId") String orderId)
     {
         return trackingServices.cancelDelivery(orderId);
     }
@@ -61,7 +62,7 @@ public class MainController {
 
 
     @PutMapping("/deliveryCompleted/{orderId}")
-    public void deliveryCompleted(@PathVariable("orderId") Long orderId,
+    public void deliveryCompleted(@PathVariable("orderId") String orderId,
                                   @RequestParam(required = false) String status)
     {
         trackingServices.deliveryCompleted(orderId,status);
