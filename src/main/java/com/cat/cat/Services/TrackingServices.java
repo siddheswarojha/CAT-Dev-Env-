@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 
 @Service
@@ -44,7 +42,7 @@ public class TrackingServices {
         return responses;
     }
 
-    public Optional<ParcelData> getParticularTrackingDetail(Long orderId) {
+    public Optional<ParcelData> getParticularTrackingDetail(String orderId) {
 //        boolean checkDataWithOrderId = parcelRepository.existsById(orderId);
 //        if(!checkDataWithOrderId)
 //        {
@@ -63,21 +61,54 @@ public class TrackingServices {
 
     }
 
-    public void setTrackingDetail(ParcelData parcelData) {
-        Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(parcelData.getOrderId());
+    public String setTrackingDetail(Map<String,String> parcelData) {
+
+      String orderId =   generateOrderId();
+
+//        Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(Long.valueOf(parcelData.get("orderId")));
+//
+//        if(parcelOptional.isPresent())
+//        {
+//            throw new IllegalStateException("OrderId should be Unique");
+//
+//        }
+
+        ParcelData pd = new ParcelData();
+        pd.setOrderId(orderId);
+        pd.setStatus(parcelData.get("status"));
+        pd.setItemType(parcelData.get("itemType"));
+        pd.setCurrentLocation(parcelData.get("currentLocation"));
+        pd.setDeliveryLocation(parcelData.get("deliveryLocation"));
+        pd.setStartLocation(parcelData.get("startLocation"));
+        pd.setName(parcelData.get("name"));
+        pd.setExpectedDeliveryDate(LocalDate.parse(parcelData.get("expectedDeliveryDate")));
+
+        parcelRepository.save(pd);
+        return orderId;
+    }
+
+    private String generateOrderId() {
+
+        Random rd = new Random();
+        String id = String.valueOf(rd.nextInt(10000));
+//        String id = String.valueOf(Math.random(0,1000000));
+        Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(id);
 
         if(parcelOptional.isPresent())
         {
-            throw new IllegalStateException("OrderId should be Unique");
+           generateOrderId();
 
         }
+        else
+        {
+            return id;
+        }
+        return id;
 
 
-
-        parcelRepository.save(parcelData);
     }
 
-    public String cancelDelivery(Long orderId) {
+    public String cancelDelivery(String orderId) {
 
         Optional<ParcelData> parcelOptional = parcelRepository.findParcelDataByOrderId(orderId);
 
@@ -92,7 +123,7 @@ public class TrackingServices {
     }
 
     @Transactional
-    public void deliveryCompleted(Long orderId, String status) {
+    public void deliveryCompleted(String orderId, String status) {
         ParcelData parcelData= parcelRepository.findParcelDataByOrderId(orderId)
                 .orElseThrow(()->new IllegalStateException("Parcel Not Found"));
 

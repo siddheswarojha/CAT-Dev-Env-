@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface ParcelRepository extends MongoRepository<ParcelData, ObjectId> {
 
-    Optional<ParcelData> findParcelDataByOrderId(Long orderId);
+    Optional<ParcelData> findParcelDataByOrderId(String orderId);
 
-    Optional<ParcelData> deleteParcelDataByOrderId(Long orderId);
+    Optional<ParcelData> deleteParcelDataByOrderId(String orderId);
 }

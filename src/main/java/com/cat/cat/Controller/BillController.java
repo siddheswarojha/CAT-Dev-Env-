@@ -15,8 +15,14 @@ public class BillController {
 
 
     @PostMapping("/generateBill/{orderId}")
-    public String setBilling(@PathVariable Long orderId)
+    public String setBilling(@PathVariable String orderId)
     {
-       return billingServices.setBilling(orderId);
+        try {
+            return billingServices.setBilling(orderId);
+        } catch (Exception e) {
+            System.out.println("exception at bill controller");
+        }
+
+        return "error";
     }
 }

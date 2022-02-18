@@ -20,17 +20,18 @@ public class ParcelData {
 
     @Id
     private ObjectId _id;
-    private Long orderId;
+    private String orderId;
     private String name;
     private String itemType;
     private String startLocation;
     private String currentLocation;
     private LocalDate expectedDeliveryDate;
     private String status;
+    private String deliveryLocation;
 
 
 
-    public ParcelData(Long orderId,
+    public ParcelData(String orderId,
                       String name,
                       String itemType,
                       String startLocation,
@@ -48,10 +49,10 @@ public class ParcelData {
         this.deliveryLocation = deliveryLocation;
     }
 
-    private String deliveryLocation;
+
 
     public ParcelData(ObjectId _id,
-                      Long orderId,
+                      String orderId,
                       String name,
                       String itemType,
                       String startLocation,
